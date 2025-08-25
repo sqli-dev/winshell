@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {hover, toggleView, state, view, toggleFocus, initRef, onResult} from "@/scripts/search.ts"
+import {hover, toggleView, state, view, toggleFocus, initRef, onResult} from "../scripts/search.ts"
 import SearchResult from "@/components/SearchResult.vue";
 import {invoke} from "@tauri-apps/api/core";
 
 const searchBox = ref<HTMLElement | null>(null);
-const input = ref<HTMLElement | null>(null);
+const input = ref<HTMLInputElement | null>(null);
 const suggestTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 
 onMounted(() => {

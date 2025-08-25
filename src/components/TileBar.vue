@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref, useTemplateRef} from "vue";
-import {init, mouseMove, onHover} from "@/scripts/tiles.ts";
+import {init, mouseMove, onHover} from "../scripts/tiles.ts";
 import Tile from './Tile.vue'
 
 const tileBox = useTemplateRef("tileBox");

@@ -74,7 +74,7 @@ onMounted(() => {
 
   const lowestLayer = document.querySelector("#lowestLayer");
   if (lowestLayer) {
-    lowestLayer.addEventListener('mouseup', (e) => {
+    lowestLayer.addEventListener('mouseup', (e: MouseEvent) => {
       if (!colorPicker.value) return;
 
       if (clickTimeout) {
