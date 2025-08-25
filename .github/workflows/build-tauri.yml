@@ -1,0 +1,67 @@
+name: Build Tauri Windows
+
+on:
+  workflow_dispatch: # ręczne odpalanie w Actions
+  push:
+    branches: ["main"]
+
+jobs:
+  build-windows-x64:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-pc-windows-msvc
+          override: true
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Tauri (Windows x64)
+        run: npm run tauri build
+
+      - name: Upload artifact (x64 exe)
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64-exe
+          path: src-tauri/target/release/*.exe
+
+  build-windows-arm64:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: aarch64-pc-windows-msvc
+          override: true
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Tauri (Windows ARM64)
+        run: npm run tauri build -- --target aarch64-pc-windows-msvc
+
+      - name: Upload artifact (ARM64 exe)
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-arm64-exe
+          path: src-tauri/target/aarch64-pc-windows-msvc/release/*.exe

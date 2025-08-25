@@ -1,0 +1,46 @@
+/*Glass-morphism*/
+.glass-bg {
+    background: linear-gradient(45deg, rgba(255, 255, 255, .01), rgba(180, 180, 180, .005));
+    backdrop-filter: blur(3px);
+}
+.glass-bg-2 {
+    background: linear-gradient(45deg, rgba(255, 255, 255, .05), rgba(180, 180, 180, .025));
+    backdrop-filter: blur(3px);
+}
+.glass-bg::after, .glass-bg-2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url('../images/noise_20x20.png');
+    background-repeat: repeat;
+    background-size: 20px;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.glass-border {
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+}
+
+.glass-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0.2),
+            rgba(180, 180, 180, 0.2)
+    );
+    -webkit-mask-image:
+            linear-gradient(#fff 0 0),
+            linear-gradient(#fff 0 0);
+    -webkit-mask-origin: content-box, border-box;
+    -webkit-mask-clip: content-box, border-box;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
