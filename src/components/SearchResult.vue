@@ -1,10 +1,12 @@
 <script setup>
 import {result} from "@/scripts/search.ts";
+import {command} from "@/scripts/low/actions.js";
+import {chrome} from "@/scripts/low/defined_paths.js";
 </script>
 
 <template>
   <div id="result">
-    <p v-for="value of result.filter(v=>v.length>0)" class="glass-border glass-bg">{{ value }}</p>
+    <p v-for="value of result.filter(v=>v.length>0)" class="glass-border glass-bg" @click='command(chrome+ ` "https://www.google.com/search?q=${value}"`)'>{{ value }}</p>
   </div>
 </template>
 

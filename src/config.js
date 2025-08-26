@@ -3,4 +3,5 @@ export default {
     sound: false,
     connection: false,
     alerts: false,
+    processbar: false
 }

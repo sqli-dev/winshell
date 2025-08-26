@@ -32,6 +32,9 @@ onMounted(() => {
     }
   });
 })
+// window.addEventListener("contextmenu", (e) => {
+//   e.preventDefault();
+// });
 </script>
 
 <template>
@@ -40,7 +43,7 @@ onMounted(() => {
   <ColorPicker/>
   <Clock :class="{'up': locked}"/>
   <TileBar :class="{'up': locked}"/>
-  <ProcessBar :class="{'down': locked}"/>
+  <ProcessBar :class="{'down': locked}" v-if="config.processbar"/>
   <Search placeholder="Web search" :class="{'up': locked}"/>
   <Start/>
   <Notifications v-if="config.notifications"/>

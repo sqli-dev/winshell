@@ -44,7 +44,7 @@ defineProps<{
     <div id="search" ref="searchBox" :class="{ hide: !view }" @mouseenter="toggleView(true)"
          @mouseleave="toggleView(false)">
       <div class="flex gap-3">
-        <img src="/src/images/search.png" alt="search"/>
+        <img src="/images/search.png" alt="search"/>
         <input ref="input" @input="onInput" autocomplete="off" id="s_inp" type="text" @focusin="toggleFocus(true)"
                @focusout="toggleFocus(false)"
                :placeholder="placeholder">

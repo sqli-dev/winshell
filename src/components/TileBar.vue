@@ -2,6 +2,7 @@
 import {onMounted, ref, useTemplateRef} from "vue";
 import {init, mouseMove, onHover} from "../scripts/tiles.ts";
 import Tile from './Tile.vue'
+import {chrome, discord, explorer, riot, youtube} from "../scripts/low/defined_paths.ts";
 
 const tileBox = useTemplateRef("tileBox");
 const tiles = ref<HTMLElement[] | null>(null);
@@ -21,11 +22,11 @@ onMounted(() => {
          @mousemove="mouseMove"
          @mouseenter="onHover(true)"
          @mouseleave="onHover(false)">
-      <Tile image="/src/images/youtube.png" name="YouTube"/>
-      <Tile image="/src/images/discord.png" name="Discord"/>
-      <Tile image="/src/images/riot.png" name="Riot Client"/>
-      <Tile image="/src/images/chrome.png" name="Chrome"/>
-      <Tile image="/src/images/explorer.png" name="Explorer"/>
+      <Tile :path="youtube" image="/images/youtube.png" name="YouTube"/>
+      <Tile :path="discord" image="/images/discord.png" name="Discord"/>
+      <Tile :path="riot" image="/images/riot.png" name="Riot Client"/>
+      <Tile :path="chrome" image="/images/chrome.png" name="Chrome"/>
+      <Tile :path="explorer" image="/images/explorer.png" name="Explorer"/>
     </div>
   </div>
 </template>

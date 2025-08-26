@@ -20,7 +20,7 @@ const close = () => {
 <template>
   <div :class="['notification glass-border glass-bg', { 'full': full, 'hide-not': hidden }]" @click="toggle" @dblclick="close">
     <div class="n-head flex items-center">
-      <img src="/src/images/youtube.png" alt="notification">
+      <img src="/images/youtube.png" alt="notification">
       <h2>New video!</h2>
     </div>
     <p>Young dupsko uploaded new video "Challange 30 dni bez srania" its super fun and yeah, you should watch it like

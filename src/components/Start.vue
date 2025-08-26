@@ -12,33 +12,33 @@ mouseEvents();
   <div id="options" class="hide">
     <div id="power" class="option" @click="toggleOption('power')" @mouseenter="me" @mouseleave="mq">
       <div class="sub">
-        <img src="/src/images/actions/power.png" alt="Power">
+        <img src="/images/actions/power.png" alt="Power">
         <p>Power</p>
       </div>
       <div class="actions">
         <div class="action" @click="perform('shutdown')">
           <p>Shutdown</p>
-          <img src="/src/images/actions/power.png" alt="Power">
+          <img src="/images/actions/power.png" alt="Power">
         </div>
         <div class="action" @click="perform('restart')">
           <p>Restart</p>
-          <img src="/src/images/actions/restart.png" alt="Restart">
+          <img src="/images/actions/restart.png" alt="Restart">
         </div>
         <div class="action" @click="perform('sleep')">
           <p>Sleep</p>
-          <img src="/src/images/actions/sleep.png" alt="Sleep">
+          <img src="/images/actions/sleep.png" alt="Sleep">
         </div>
       </div>
     </div>
     <div v-if="config.connection" id="connection" class="option" @click="toggleOption('connection')" @mouseenter="me" @mouseleave="mq">
       <div class="sub">
-        <img src="/src/images/actions/internet.png" alt="internet">
+        <img src="/images/actions/internet.png" alt="internet">
         <p>Connection</p>
       </div>
       <div class="actions">
         <div class="flex gap-2 flex-col text-gray-400 text-sm">
           <div class="flex gap-2 items-center text-xl text-white">
-            <img src="/src/images/actions/ethernet.png" alt="state">
+            <img src="/images/actions/ethernet.png" alt="state">
             <p>Network</p>
           </div>
           <p>Connected</p>
@@ -47,31 +47,31 @@ mouseEvents();
         <div class="networks">
           <div class="action">
             <p>ASUS</p>
-            <img src="/src/images/actions/internet.png" alt="network">
+            <img src="/images/actions/internet.png" alt="network">
           </div>
           <div class="action">
             <p>ASUS_5G</p>
-            <img src="/src/images/actions/internet.png" alt="network">
+            <img src="/images/actions/internet.png" alt="network">
           </div>
         </div>
       </div>
     </div>
     <div v-if="config.sound" id="sound" class="option" @click="toggleOption('sound')" @mouseenter="me" @mouseleave="mq">
       <div class="sub">
-        <img src="/src/images/actions/sound.png" alt="sound">
+        <img src="/images/actions/sound.png" alt="sound">
         <p>Sound</p>
       </div>
       <div class="actions">
         <div class="flex gap-2 flex-col text-gray-400 text-sm">
           <div class="flex gap-2 items-center text-xl text-white">
-            <img src="/src/images/actions/wired.png" alt="state">
+            <img src="/images/actions/wired.png" alt="state">
             <p>Nova Pro Wireless</p>
           </div>
           <p>Connected</p>
         </div>
         <br>
         <div class="control flex gap-1 text-white justify-evenly items-center">
-          <img src="/src/images/actions/sound.png" alt="control">
+          <img src="/images/actions/sound.png" alt="control">
           <input type="range" min="0" max="100" step="1">
           <p>44%</p>
         </div>
@@ -79,11 +79,11 @@ mouseEvents();
         <div class="devices">
           <div class="action">
             <p>Wireless headset</p>
-            <img src="/src/images/actions/bluetooth.png" alt="sound_dev">
+            <img src="/images/actions/bluetooth.png" alt="sound_dev">
           </div>
           <div class="action">
             <p>Sonar (Gaming) Nova Pro Wireless</p>
-            <img src="/src/images/actions/wired.png" alt="sound_dev">
+            <img src="/images/actions/wired.png" alt="sound_dev">
           </div>
         </div>
       </div>

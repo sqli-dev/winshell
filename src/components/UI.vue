@@ -5,17 +5,17 @@ import config from "@/config.js";
   <div class="root">
     <div id="ui" class="glass-bg glass-border">
       <div class="info">
-        <img src="/src/images/ui/offline.png" alt="network">
+        <img src="/images/ui/online.png" alt="network">
       </div>
       <div class="info">
         EN
       </div>
     </div>
     <div v-if="config.alerts" id="alerts" class="flex flex-col glass-bg glass-border">
-      <img src="/src/images/ui/alert.png" alt="alert">
+      <img src="/images/ui/alert.png" alt="alert">
       <div id="a-options" class="flex flex-col">
-        <img src="/src/images/ui/mute.png" alt="alert">
-        <img src="/src/images/ui/sound.png" alt="alert">
+        <img src="/images/ui/mute.png" alt="alert">
+        <img src="/images/ui/sound.png" alt="alert">
       </div>
     </div>
   </div>

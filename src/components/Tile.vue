@@ -1,12 +1,15 @@
 <script setup lang="ts">
+import {command} from "../scripts/low/actions.ts";
+
 defineProps<{
   image: string;
+  path: string;
   name: string;
 }>();
 </script>
 
 <template>
-  <div class="tile flex flex-col gap-0.5 justify-center items-center">
+  <div class="tile flex flex-col gap-0.5 justify-center items-center" @click='command(`"${path}"`)'>
     <img :src="image" :alt="name">
     <p> {{ name }} </p>
   </div>
@@ -27,6 +30,8 @@ defineProps<{
 }
 
 img {
+  position: relative;
+  opacity: .8;
   width: 3rem;
   border-radius: 16px;
 }

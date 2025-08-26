@@ -26,10 +26,10 @@ const initThreeJS = () => {
 
   const textureLoader = new THREE.TextureLoader()
   const moonTexture = textureLoader.load(
-      'moon_color.png'
+      '/moon_color.png'
   )
   const moonDisplacement = textureLoader.load(
-      'moon_disp.png'
+      '/moon_disp.png'
   )
 
   const moonMaterial = new THREE.MeshPhongMaterial({
