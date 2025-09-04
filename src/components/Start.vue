@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import config from "@/config.js"
-import { perform, cancelAction, title, timeleft, current, forceAction } from "@/scripts/start/power.ts"
+import config from "../config.js"
+import { perform, cancelAction, title, timeleft, current, forceAction } from "../scripts/start/power.ts"
 
 const hidden = ref(true)
 const isHover = ref(false)
