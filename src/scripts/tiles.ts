@@ -14,7 +14,7 @@ const baseScale = 1;
 const maxScale = 1.2;
 const growthThreshold = 0.6;
 
-// Animation configuration
+// anim config
 const ANIM_DURATION = 300;
 const ANIM_EASING = "ease-out";
 const MIN_SCALE_DIFF = 0.005;
@@ -26,7 +26,6 @@ const init = (box: HTMLElement, tilesArray: HTMLElement[]) => {
     for (const tile of tilesArray) {
         const img = tile.querySelector("img");
         if (img) {
-            // Set initial transform state
             img.style.transform = `scale(${baseScale}) translateY(0)`;
             tileDataMap.set(tile, {
                 img,
@@ -46,7 +45,6 @@ const onHover = (state: boolean) => {
             const tileData = tileDataMap.get(tile);
             if (!tileData) continue;
 
-            // Skip if already at base state
             if (tileData.lastScale === baseScale && tileData.lastTranslateY === 0) continue;
 
             animateTile(tileData, baseScale, 0);
@@ -64,7 +62,6 @@ const animateTile = (
     targetScale: number,
     targetTranslateY: number
 ) => {
-    // Cancel ongoing animation
     if (tileData.animation) {
         tileData.animation.cancel();
     }
@@ -85,22 +82,19 @@ const animateTile = (
         }
     );
 
-    // Update state immediately
     tileData.lastScale = targetScale;
     tileData.lastTranslateY = targetTranslateY;
 
-    // Clean up after animation
     tileData.animation.addEventListener("finish", () => {
         tileData.animation = null;
     });
 };
 
-// Throttle mouse events to animation frames
 let rafId: number | null = null;
 const mouseMove = (event: MouseEvent) => {
     if (!initialized.value || !boxHover.value || !tileBox.value) return;
 
-    if (rafId !== null) return; // Skip if frame is already scheduled
+    if (rafId !== null) return;
 
     rafId = requestAnimationFrame(() => {
         rafId = null;
@@ -119,7 +113,6 @@ const mouseMove = (event: MouseEvent) => {
             const scale = baseScale + t * (maxScale - baseScale);
             const translateY = t * -2;
 
-            // Only animate if values changed significantly
             const scaleDiff = Math.abs(scale - tileData.lastScale);
             const translateYDiff = Math.abs(translateY - tileData.lastTranslateY);
 

@@ -69,7 +69,6 @@ defineProps<{
 #search {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
   transition: .3s ease;
   border-radius: 20px;
   padding: 10px 30px;

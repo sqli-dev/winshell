@@ -1,41 +1,104 @@
-<script setup>
-import config from "@/config.js";
-import {me, mouseEvents, mq, toggleOption} from "@/scripts/start.ts";
-import {perform, cancelAction, title, timeleft, current, forceAction} from "@/scripts/start/power.ts";
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import config from "@/config.js"
+import { perform, cancelAction, title, timeleft, current, forceAction } from "@/scripts/start/power.ts"
 
-mouseEvents();
+const hidden = ref(true)
+const isHover = ref(false)
+const activeOption = ref<string | null>(null)
 
+const options = computed(() => {
+  const opts = ["power"]
+  if (config.connection) opts.push("connection")
+  if (config.sound) opts.push("sound")
+  return opts
+})
 
+const handleMouseMove = (event: MouseEvent) => {
+  const anyOpen = !!activeOption.value
+  const isCursorNearEdge = event.clientX <= (window.innerWidth - 250)
+
+  if (isCursorNearEdge && !hidden.value) {
+    hidden.value = true
+  } else if (!isCursorNearEdge && hidden.value && !anyOpen) {
+    hidden.value = false
+  }
+}
+
+const handleMouseDown = () => {
+  if (!isHover.value) {
+    quit()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('mousemove', handleMouseMove)
+  document.addEventListener('mousedown', handleMouseDown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('mousemove', handleMouseMove)
+  document.removeEventListener('mousedown', handleMouseDown)
+})
+
+const toggleOption = (option: string): void => {
+  if (activeOption.value === option) {
+    quit()
+    return
+  }
+
+  quit()
+  activeOption.value = option
+}
+
+const quit = (): void => {
+  activeOption.value = null
+}
+
+const mouseEnter = (): void => {
+  isHover.value = true
+}
+
+const mouseLeave = (): void => {
+  isHover.value = false
+}
 </script>
 
 <template>
-  <div id="options" class="hide">
-    <div id="power" class="option" @click="toggleOption('power')" @mouseenter="me" @mouseleave="mq">
-      <div class="sub">
-        <img src="/images/actions/power.png" alt="Power">
-        <p>Power</p>
+  <div id="options" :class="{ hide: hidden }">
+    <div
+        v-for="option in options"
+        :key="option"
+        :id="option"
+        class="option"
+        :class="{ view: activeOption === option }"
+        @click="toggleOption(option)"
+        @mouseenter="mouseEnter"
+        @mouseleave="mouseLeave"
+    >
+      <div class="sub" :class="{ wait: activeOption === option }">
+        <img :src="`/images/actions/${option}.png`" :alt="option">
+        <p>{{ option.charAt(0).toUpperCase() + option.slice(1) }}</p>
       </div>
-      <div class="actions">
-        <div class="action" @click="perform('shutdown')">
+
+      <!-- power actions -->
+      <div v-if="option === 'power'" class="actions">
+        <div class="action" @click.stop="perform('shutdown')">
           <p>Shutdown</p>
           <img src="/images/actions/power.png" alt="Power">
         </div>
-        <div class="action" @click="perform('restart')">
+        <div class="action" @click.stop="perform('restart')">
           <p>Restart</p>
           <img src="/images/actions/restart.png" alt="Restart">
         </div>
-        <div class="action" @click="perform('sleep')">
+        <div class="action" @click.stop="perform('sleep')">
           <p>Sleep</p>
           <img src="/images/actions/sleep.png" alt="Sleep">
         </div>
       </div>
-    </div>
-    <div v-if="config.connection" id="connection" class="option" @click="toggleOption('connection')" @mouseenter="me" @mouseleave="mq">
-      <div class="sub">
-        <img src="/images/actions/internet.png" alt="internet">
-        <p>Connection</p>
-      </div>
-      <div class="actions">
+
+      <!-- todo: connection -->
+      <div v-else-if="option === 'connection'" class="actions">
         <div class="flex gap-2 flex-col text-gray-400 text-sm">
           <div class="flex gap-2 items-center text-xl text-white">
             <img src="/images/actions/ethernet.png" alt="state">
@@ -46,26 +109,22 @@ mouseEvents();
         <br>
         <div class="networks">
           <div class="action">
-            <p>ASUS</p>
+            <p>Network 1</p>
             <img src="/images/actions/internet.png" alt="network">
           </div>
           <div class="action">
-            <p>ASUS_5G</p>
+            <p>Network 2</p>
             <img src="/images/actions/internet.png" alt="network">
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="config.sound" id="sound" class="option" @click="toggleOption('sound')" @mouseenter="me" @mouseleave="mq">
-      <div class="sub">
-        <img src="/images/actions/sound.png" alt="sound">
-        <p>Sound</p>
-      </div>
-      <div class="actions">
+
+      <!-- todo: sound -->
+      <div v-else-if="option === 'sound'" class="actions">
         <div class="flex gap-2 flex-col text-gray-400 text-sm">
           <div class="flex gap-2 items-center text-xl text-white">
             <img src="/images/actions/wired.png" alt="state">
-            <p>Nova Pro Wireless</p>
+            <p>Headset 1</p>
           </div>
           <p>Connected</p>
         </div>
@@ -78,17 +137,18 @@ mouseEvents();
         <br>
         <div class="devices">
           <div class="action">
-            <p>Wireless headset</p>
+            <p>Wireless headset 1</p>
             <img src="/images/actions/bluetooth.png" alt="sound_dev">
           </div>
           <div class="action">
-            <p>Sonar (Gaming) Nova Pro Wireless</p>
+            <p>Speakers 1</p>
             <img src="/images/actions/wired.png" alt="sound_dev">
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div id="shadow" class="none"></div>
   <div id="popup" class="none glass-bg-2 glass-border">
     <h1>{{ title }}</h1>
@@ -103,6 +163,7 @@ mouseEvents();
 </template>
 
 <style scoped>
+/* Styles remain the same as in the original */
 .control {
   gap: 20px;
 
@@ -124,7 +185,6 @@ mouseEvents();
     box-shadow: 0 0 5px white;
     border-radius: 50%;
   }
-
 }
 
 .option {
@@ -158,6 +218,7 @@ mouseEvents();
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     background: rgba(255, 255, 255, .05);
     border: 1px solid rgba(255,255,255,.2);
+
     p {
       opacity: 1;
     }
@@ -186,6 +247,7 @@ mouseEvents();
     max-width: 25rem;
     opacity: 1;
   }
+
   &::before {
     content: "";
     position: absolute;
@@ -204,7 +266,6 @@ mouseEvents();
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-
   }
 }
 

@@ -1,6 +1,6 @@
 <script setup>
 import Process from "./Process.vue";
-import {isHovered,handleMouseMove} from "@/scripts/processbar.ts";
+import {handleMouseMove} from "@/scripts/processbar.ts";
 import {onMounted, onUnmounted} from "vue";
 
 onMounted(() => {

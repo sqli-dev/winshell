@@ -1,21 +1,28 @@
 <script setup>
+import { ref } from "vue";
 import config from "@/config.js";
+
+const alertsOpen = ref(false);
+
+function toggleAlerts() {
+  alertsOpen.value = !alertsOpen.value;
+}
 </script>
+
 <template>
   <div class="root">
     <div id="ui" class="glass-bg glass-border">
       <div class="info">
-        <img src="/images/ui/online.png" alt="network">
+        <img src="/images/ui/online.png" alt="network" />
       </div>
-      <div class="info">
-        EN
-      </div>
+      <div class="info">EN</div>
     </div>
+
     <div v-if="config.alerts" id="alerts" class="flex flex-col glass-bg glass-border">
-      <img src="/images/ui/alert.png" alt="alert">
-      <div id="a-options" class="flex flex-col">
-        <img src="/images/ui/mute.png" alt="alert">
-        <img src="/images/ui/sound.png" alt="alert">
+      <img src="/images/ui/alert.png" alt="alert" @click="toggleAlerts" />
+      <div id="a-options" class="flex flex-col" :style="{ height: alertsOpen ? '4.5rem' : '0', marginBottom: alertsOpen ? '0' : '-10px', marginTop: alertsOpen ? '1rem' : '0' }">
+        <img src="/images/ui/mute.png" alt="alert" />
+        <img src="/images/ui/sound.png" alt="alert" />
       </div>
     </div>
   </div>
@@ -23,102 +30,47 @@ import config from "@/config.js";
 
 <style scoped>
 .root {
-  transition: .6s ease;
   position: fixed;
+  top: 5px;
   right: 5px;
-  top: 5px;
-}
-h3 {
-  color: orange;
-}
-
-small {
-  margin-left: -1.5rem;
-  margin-bottom: 10px;
-  color: #aaa;
-}
-
-#a-options {
-  transition: .3s ease;
-  gap: 10px;
-  height: 0;
-  margin-bottom: -10px;
-  overflow: hidden;
-
-  img {
-    transition: .3s ease;
-  }
-
-  img:hover {
-
-    background: rgba(0, 0, 0, .2);
-    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
-    padding: 4px;
-    border-radius: 4px;
-  }
-}
-
-#alerts {
-  top: 5px;
-  gap: 10px;
-  right: 6rem;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
-  padding: 4px;
-
-  img {
-    width: 2rem;
-  }
-
-  p {
-    position: absolute;
-    top: 4.5px;
-    color: white;
-    font-weight: bold;
-    font-size: 8px;
-    right: 9px;
-  }
-
-  &:hover {
-    #a-options {
-      height: calc(4rem + 20px);
-      margin-bottom: 0;
-      margin-top: 1rem;
-    }
-  }
+  transition: 0.6s ease;
 }
 
 #ui {
   display: flex;
   gap: 1rem;
-  right: 5px;
-  top: 5px;
   padding: 4px 10px;
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .info {
-  transition: .3s ease;
-  width: 1.5rem;
-  font-size: .8rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 1.5rem;
   height: 1.5rem;
   padding: 4px;
   border-radius: 4px;
   color: white;
+  font-size: 0.8rem;
+  transition: 0.3s ease;
+}
 
-  &:hover {
-    background: rgba(255, 255, 255, .2);
-    box-shadow: 0 0 5px rgba(255, 255, 255, .1);
-  }
+.info:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+#a-options {
+  overflow: hidden;
+  transition: all 0.3s ease;
+  gap: 10px;
 }
 
 img {
   width: 1.2rem;
   filter: invert(1);
-  opacity: .8;
+  opacity: 0.8;
 }
 </style>

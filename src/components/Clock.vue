@@ -13,7 +13,6 @@ const updateTime = () => {
   hours = hours ? hours : 12;
   time.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
 
-  //Date
   const dateString = now.toDateString().split(" ");
   dateString.pop();
   date.value = dateString.join(" ");

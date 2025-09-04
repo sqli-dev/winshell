@@ -3,15 +3,15 @@ import {ref} from "vue";
 
 const full = ref(false);
 const hidden = ref(false);
-let dbl = false;
+let double = false;
 const toggle = () => {
   setTimeout(() => {
-    if (!dbl)
+    if (!double)
       full.value = !full.value;
   }, 100)
 }
 const close = () => {
-  dbl = true;
+  double = true;
   full.value = false;
   hidden.value = true;
 }
@@ -23,8 +23,7 @@ const close = () => {
       <img src="/images/youtube.png" alt="notification">
       <h2>New video!</h2>
     </div>
-    <p>Young dupsko uploaded new video "Challange 30 dni bez srania" its super fun and yeah, you should watch it like
-      right now</p>
+    <p>sajdas aksdoa sdkadso asjd isnda knkasd mas dkm</p>
   </div>
 </template>
 

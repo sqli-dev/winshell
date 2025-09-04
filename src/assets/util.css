@@ -12,7 +12,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background-image: url('../images/noise_20x20.png');
+    background-image: url('/images/noise_20x20.png');
     background-repeat: repeat;
     background-size: 20px;
     opacity: 0.2;
@@ -22,6 +22,7 @@
 .glass-border {
     overflow: hidden;
     backdrop-filter: blur(2px);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .glass-border::before {

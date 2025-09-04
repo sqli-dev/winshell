@@ -53,7 +53,6 @@ onMounted(() => {
   justify-content: center;
   top: 25px;
   padding: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
   border-radius: 16px;
   width: 80%;
   left: 50%;
